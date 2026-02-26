@@ -1,0 +1,11 @@
+{
+  "uid": "cf-vitals",
+  "title": "System Vitals",
+  "schemaVersion": 36,
+  "panels": [
+    {"id": 1, "title": "CPU %", "type": "timeseries", "targets": [{"expr": "cf_cpu_usage_percent"}]},
+    {"id": 2, "title": "RAM %", "type": "timeseries", "targets": [{"expr": "cf_ram_usage_percent"}]},
+    {"id": 3, "title": "Disk I/O", "type": "timeseries", "targets": [{"expr": "cf_disk_io_read_bytes"}, {"expr": "cf_disk_io_write_bytes"}]},
+    {"id": 4, "title": "Network I/O", "type": "timeseries", "targets": [{"expr": "cf_network_io_sent_bytes"}, {"expr": "cf_network_io_recv_bytes"}]}
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "uid": "cf-emotional",
+  "title": "Emotional State",
+  "schemaVersion": 36,
+  "panels": [
+    {
+      "id": 1,
+      "title": "Primary Emotions",
+      "type": "timeseries",
+      "targets": [
+        {"expr": "cf_emotion_joy"},
+        {"expr": "cf_emotion_trust"},
+        {"expr": "cf_emotion_fear"},
+        {"expr": "cf_emotion_surprise"},
+        {"expr": "cf_emotion_sadness"},
+        {"expr": "cf_emotion_disgust"},
+        {"expr": "cf_emotion_anger"},
+        {"expr": "cf_emotion_anticipation"}
+      ]
+    }
+  ]
+}

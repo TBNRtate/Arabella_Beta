@@ -1,0 +1,11 @@
+{
+  "uid": "cf-memory",
+  "title": "Memory System",
+  "schemaVersion": 36,
+  "panels": [
+    {"id": 1, "title": "Vector Store Size", "type": "timeseries", "targets": [{"expr": "cf_memory_vector_store_size"}]},
+    {"id": 2, "title": "Retrieval Latency", "type": "timeseries", "targets": [{"expr": "cf_memory_retrieval_latency_ms"}]},
+    {"id": 3, "title": "Consolidation Cycles", "type": "timeseries", "targets": [{"expr": "cf_memory_consolidation_cycles_total"}]},
+    {"id": 4, "title": "Contradictions", "type": "timeseries", "targets": [{"expr": "cf_memory_contradictions_detected_total"}]}
+  ]
+}

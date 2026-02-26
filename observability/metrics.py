@@ -1,0 +1,40 @@
+from prometheus_client import Counter, Gauge
+
+cpu_usage_percent = Gauge("cf_cpu_usage_percent", "CPU usage percentage")
+ram_usage_percent = Gauge("cf_ram_usage_percent", "RAM usage percentage")
+ram_used_bytes = Gauge("cf_ram_used_bytes", "RAM used in bytes")
+disk_io_read_bytes = Gauge("cf_disk_io_read_bytes", "Disk read bytes/sec")
+disk_io_write_bytes = Gauge("cf_disk_io_write_bytes", "Disk write bytes/sec")
+network_io_sent_bytes = Gauge("cf_network_io_sent_bytes", "Network sent bytes/sec")
+network_io_recv_bytes = Gauge("cf_network_io_recv_bytes", "Network received bytes/sec")
+
+inference_tokens_per_sec = Gauge("cf_inference_tokens_per_sec", "Current inference speed")
+inference_time_to_first_token_ms = Gauge("cf_inference_ttft_ms", "Time to first token ms")
+inference_context_length_used = Gauge("cf_inference_context_length", "Tokens in current context")
+inference_errors_total = Counter("cf_inference_errors_total", "Total inference errors")
+inference_requests_total = Counter("cf_inference_requests_total", "Total inference requests")
+
+emotion_joy = Gauge("cf_emotion_joy", "Joy intensity 0-1")
+emotion_trust = Gauge("cf_emotion_trust", "Trust intensity 0-1")
+emotion_fear = Gauge("cf_emotion_fear", "Fear intensity 0-1")
+emotion_surprise = Gauge("cf_emotion_surprise", "Surprise intensity 0-1")
+emotion_sadness = Gauge("cf_emotion_sadness", "Sadness intensity 0-1")
+emotion_disgust = Gauge("cf_emotion_disgust", "Disgust intensity 0-1")
+emotion_anger = Gauge("cf_emotion_anger", "Anger intensity 0-1")
+emotion_anticipation = Gauge("cf_emotion_anticipation", "Anticipation intensity 0-1")
+emotion_transitions_total = Counter("cf_emotion_transitions_total", "Total emotion state transitions")
+
+tool_calls_attempted_total = Counter("cf_tool_calls_attempted_total", "Total tool call attempts", ["tool_name"])
+tool_calls_succeeded_total = Counter("cf_tool_calls_succeeded_total", "Total successful tool calls", ["tool_name"])
+tool_calls_blocked_total = Counter("cf_tool_calls_blocked_total", "Total blocked tool calls", ["reason"])
+tool_calls_failed_total = Counter("cf_tool_calls_failed_total", "Total failed tool calls", ["tool_name"])
+permission_prompts_total = Counter("cf_permission_prompts_total", "Total permission prompts shown")
+
+memory_vector_store_size = Gauge("cf_memory_vector_store_size", "Number of vectors in episodic store")
+memory_retrieval_latency_ms = Gauge("cf_memory_retrieval_latency_ms", "Last retrieval latency ms")
+memory_consolidation_cycles_total = Counter("cf_memory_consolidation_cycles_total", "Total consolidation cycles")
+memory_contradictions_detected_total = Counter("cf_memory_contradictions_detected_total", "Contradictions detected")
+memory_archival_entries = Gauge("cf_memory_archival_entries", "Entries in archival store")
+
+component_state = Gauge("cf_component_state", "Component state as integer", ["component_name", "state"])
+event_bus_queue_size = Gauge("cf_event_bus_queue_size", "Current event bus queue size")
