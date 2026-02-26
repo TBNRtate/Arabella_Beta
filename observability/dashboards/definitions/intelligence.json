@@ -1,0 +1,11 @@
+{
+  "uid": "cf-intelligence",
+  "title": "Inference Intelligence",
+  "schemaVersion": 36,
+  "panels": [
+    {"id": 1, "title": "Tokens/sec", "type": "timeseries", "targets": [{"expr": "cf_inference_tokens_per_sec"}]},
+    {"id": 2, "title": "TTFT", "type": "timeseries", "targets": [{"expr": "cf_inference_ttft_ms"}]},
+    {"id": 3, "title": "Context Length", "type": "timeseries", "targets": [{"expr": "cf_inference_context_length"}]},
+    {"id": 4, "title": "Error Rate", "type": "timeseries", "targets": [{"expr": "cf_inference_errors_total"}]}
+  ]
+}

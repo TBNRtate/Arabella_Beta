@@ -1,0 +1,11 @@
+{
+  "uid": "cf-agentic",
+  "title": "Agentic Activity",
+  "schemaVersion": 36,
+  "panels": [
+    {"id": 1, "title": "Tool Attempted", "type": "timeseries", "targets": [{"expr": "cf_tool_calls_attempted_total"}]},
+    {"id": 2, "title": "Tool Succeeded", "type": "timeseries", "targets": [{"expr": "cf_tool_calls_succeeded_total"}]},
+    {"id": 3, "title": "Tool Blocked", "type": "timeseries", "targets": [{"expr": "cf_tool_calls_blocked_total"}]},
+    {"id": 4, "title": "Permission Prompts", "type": "timeseries", "targets": [{"expr": "cf_permission_prompts_total"}]}
+  ]
+}
