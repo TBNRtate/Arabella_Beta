@@ -1,0 +1,12 @@
+pydantic==2.11.7
+pydantic-settings==2.10.1
+PyYAML==6.0.2
+structlog==25.4.0
+pyzmq==27.1.0
+psutil==7.0.0
+aiofiles==24.1.0
+rich==14.1.0
+watchdog==6.0.0
+typing-extensions==4.15.0
+pytest==8.4.1
+pytest-asyncio==1.1.0
