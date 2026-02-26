@@ -52,14 +52,13 @@ class EventBus:
     def subscribe(self, pattern: str, handler: Callable[[Event], Awaitable[None]], replay_last: int = 0) -> str:
         sub_id = str(uuid4())
         queue: asyncio.Queue[Event] = asyncio.Queue(maxsize=self.config.max_queue_size)
+        worker = asyncio.create_task(self._subscriber_worker(sub_id))
         self._subscriptions[sub_id] = {
             "pattern": pattern,
             "handler": handler,
             "queue": queue,
-            "worker": None,
+            "worker": worker,
         }
-        worker = asyncio.create_task(self._subscriber_worker(sub_id))
-        self._subscriptions[sub_id]["worker"] = worker
 
         if replay_last > 0:
             for event in self.get_history(pattern=pattern, limit=replay_last):

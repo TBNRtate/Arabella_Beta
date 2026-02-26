@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 from dataclasses import MISSING, dataclass, field
-from typing import Any, Dict, get_args, get_origin, get_type_hints
+from typing import Any, get_origin
 
 
 class ValidationError(Exception):
@@ -34,30 +34,9 @@ class BaseModel:
         dataclass(cls)
 
     @classmethod
-    def _coerce_value(cls, annotation, value):
-        origin = get_origin(annotation)
-        args = get_args(annotation)
-
-        if isinstance(annotation, type) and issubclass(annotation, BaseModel) and isinstance(value, dict):
-            return annotation.model_validate(value)
-
-        if origin in {dict, Dict} and args and len(args) == 2 and isinstance(value, dict):
-            _, val_t = args
-            if isinstance(val_t, type) and issubclass(val_t, BaseModel):
-                return {
-                    k: (v if isinstance(v, val_t) else val_t.model_validate(v) if isinstance(v, dict) else v)
-                    for k, v in value.items()
-                }
-        return value
-
-    @classmethod
     def model_validate(cls, data: dict):
         try:
-            coerced = dict(data)
-            for field_name, annotation in get_type_hints(cls).items():
-                if field_name in coerced:
-                    coerced[field_name] = cls._coerce_value(annotation, coerced[field_name])
-            return cls(**coerced)
+            return cls(**data)
         except TypeError as exc:
             raise ValidationError([{"msg": str(exc)}]) from exc
 

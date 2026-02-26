@@ -75,7 +75,6 @@ class LifecycleManager:
                 component = self._components[name]
                 required = component.metadata.dependencies
                 if any(self._components[d].state == ComponentState.FAILED for d in required):
-                    component._set_state(ComponentState.STARTING)
                     component._set_state(ComponentState.FAILED)
                     return
                 component._set_state(ComponentState.STARTING)
@@ -98,14 +97,10 @@ class LifecycleManager:
                 if component.state not in {ComponentState.RUNNING, ComponentState.DEGRADED, ComponentState.FAILED}:
                     return
                 try:
-                    if component.state == ComponentState.FAILED:
-                        await asyncio.wait_for(component.stop(), timeout=component.config.shutdown_timeout)
-                        return
                     component._set_state(ComponentState.STOPPING)
                     await asyncio.wait_for(component.stop(), timeout=component.config.shutdown_timeout)
                 except Exception:  # noqa: BLE001
-                    if component.state != ComponentState.FAILED:
-                        component._set_state(ComponentState.FAILED)
+                    component._set_state(ComponentState.FAILED)
 
             await asyncio.gather(*(stop_component(name) for name in level))
 

@@ -60,3 +60,15 @@ class CoreConfig(BaseModel):
     platform: PlatformConfig = Field(default_factory=PlatformConfig)
     extensions: dict[str, Any] = Field(default_factory=dict)
 
+    def __post_init__(self):
+        if isinstance(self.logging, dict):
+            self.logging = LoggingConfig(**self.logging)
+        if isinstance(self.event_bus, dict):
+            self.event_bus = EventBusConfig(**self.event_bus)
+        if isinstance(self.platform, dict):
+            self.platform = PlatformConfig(**self.platform)
+        if isinstance(self.components, dict):
+            self.components = {
+                k: (v if isinstance(v, ComponentConfig) else ComponentConfig(**v))
+                for k, v in self.components.items()
+            }
