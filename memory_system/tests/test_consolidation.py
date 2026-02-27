@@ -6,6 +6,7 @@ import pytest
 
 from core_framework.config.schema import EventBusConfig
 from core_framework.events.bus import EventBus
+from core_framework.events.schema import Event
 from core_framework.events.schema import PrivacyClass
 from core_framework.platform.base import BasePlatformLayer, PlatformCapability
 from memory_system.archival import ArchivalStore
