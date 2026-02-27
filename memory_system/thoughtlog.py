@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import json
 from datetime import datetime
-from uuid import uuid4
 
 import aiosqlite
 
@@ -96,7 +95,7 @@ class ThoughtLog(BaseComponent):
             return
         await self.log(
             ThoughtEvent(
-                event_id=str(uuid4()),
+                event_id=event.event_id,
                 timestamp=event.timestamp,
                 event_type=event_type,
                 content=content,

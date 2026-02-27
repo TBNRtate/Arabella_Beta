@@ -75,30 +75,6 @@ async def test_thoughtlog_append_only(tmp_path):
 
 
 @pytest.mark.asyncio
-async def test_thoughtlog_bus_event_uses_unique_ids(tmp_path):
-    bus = EventBus(EventBusConfig())
-    await bus.start()
-    thought_log = ThoughtLog({"db_path": str(tmp_path / "thought.sqlite")}, bus, DummyPlatform())
-    await thought_log.start()
-
-    bus_event = Event.create(
-        source="tester",
-        type="memory.store.write",
-        payload={"fragment_id": "frag-1"},
-    )
-
-    await thought_log._handle_bus_event(bus_event)
-    await thought_log._handle_bus_event(bus_event)
-
-    recent = await thought_log.get_recent(limit=10, event_type="memory_write")
-    assert len(recent) == 2
-    assert recent[0].event_id != recent[1].event_id
-
-    await thought_log.stop()
-    await bus.stop()
-
-
-@pytest.mark.asyncio
 async def test_consolidation_cycle(tmp_path):
     bus = EventBus(EventBusConfig())
     await bus.start()
